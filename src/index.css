@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+nav .active{
+    color: #b7c5ca;
+}
