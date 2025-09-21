@@ -32,7 +32,7 @@ function Register() {
     setIsLoading(true);
     const { confirmPassword, ...payload } = data; 
     try{
-      const {data,status} = await axiosInstance.post("/auth/local/register", payload);
+      const {status} = await axiosInstance.post("/auth/local/register", payload);
       if(status === 200){
         toast.success("Registration successful");
       }

@@ -15,3 +15,21 @@ export interface IRegisterForm {
     };
 }
 
+export interface ILoginForm {
+    name: 'identifier' | 'password';
+    type: string;
+    placeholder: string;
+    validation?: {
+        required?: string;
+        minLength?: {
+            value: number;
+            message: string;
+        };
+        pattern?: {
+            value: RegExp;
+            message: string;
+        };
+    };
+}
+
+

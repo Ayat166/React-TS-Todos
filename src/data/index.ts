@@ -1,4 +1,4 @@
-import type { IRegisterForm } from "../interfaces";
+import type { ILoginForm, IRegisterForm } from "../interfaces";
 
 export const RegisterForm : IRegisterForm[] = [ 
     {
@@ -49,4 +49,31 @@ export const RegisterForm : IRegisterForm[] = [
             },
         }
     },
+]
+
+export const LoginForm : ILoginForm[] = [ 
+    {
+        name:"identifier",
+        type:"text",
+        placeholder:"Username or Email",
+        validation:{
+            required:"Username or Email is required",
+            minLength:{
+                value:3,
+                message:"Username or Email must be at least 3 characters long",
+            }
+        }
+    },
+    {
+        name:"password",
+        type:"password",
+        placeholder:"Password",
+        validation:{
+            required:"Password is required",
+            minLength:{
+                value:6,
+                message:"Password must be at least 6 characters long",
+            }
+        }       
+    }
 ]
