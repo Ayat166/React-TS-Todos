@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   return (
     <nav className="bg-blue-600 px-6 py-3 shadow-md">
       <ul className="flex items-center text-white font-medium">
@@ -12,21 +13,27 @@ const Navbar = () => {
           </NavLink>
         </li>
         <div className="ml-auto flex gap-6">
-          <li>
-            <NavLink
-              to="/register"
-            >
-              Register
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/login"
-            >
-              Login
-            </NavLink>
-          </li>
-        </div>
+          {userData?.jwt ? (
+            <p>Welcome {userData?.user?.username}</p>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to="/register"
+                >
+                  Register
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              </li>
+            </>
+          )}</div>
+
       </ul>
     </nav>
   );

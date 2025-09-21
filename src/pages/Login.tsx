@@ -7,6 +7,7 @@ import { LoginForm } from "../data";
 import InputErrorMessage from "../components/InputErrorMessage";
 import { useState } from "react";
 import axios from "axios";
+
 interface ILoginForm {
   identifier: string;
   password: string;
@@ -24,9 +25,17 @@ function LoginPage() {
 
     setIsLoading(true);
     try{
-      const {status} = await axiosInstance.post("/auth/local", data);
+      const {status , data : resData} = await axiosInstance.post("/auth/local", data);
       if(status === 200){
-        toast.success("Login successful");
+        toast.success("Login successful you will redirect to home page");
+        //** Save user data to local storage */
+        localStorage.setItem("userData", JSON.stringify({
+          jwt: resData.jwt,
+          user: resData.user,
+        }));
+        setTimeout(() => {
+          location.replace("/");
+        }, 2000);
       }
     }catch(err){
       if(axios.isAxiosError(err)){

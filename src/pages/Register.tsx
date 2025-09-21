@@ -6,9 +6,9 @@ import type { SubmitHandler } from "react-hook-form";
 import { RegisterForm } from "../data";
 import axiosInstance from "../config/axios.config";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 interface IRegisterForm {
   username: string;
   email: string;
@@ -25,6 +25,8 @@ function Register() {
   } = useForm<IRegisterForm>();
   const password = watch("password");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
 
   //** Handler */
   const onSubmit: SubmitHandler<IRegisterForm> = async(data) => {
@@ -34,7 +36,10 @@ function Register() {
     try{
       const {status} = await axiosInstance.post("/auth/local/register", payload);
       if(status === 200){
-        toast.success("Registration successful");
+        toast.success("Registration successful you will redirect to login page");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       }
     }catch(err){
       if(axios.isAxiosError(err)){
@@ -77,7 +82,6 @@ function Register() {
           <Button type="submit" title="Register" className="w-full" isLoading={isLoading} />
         </form>
       </div>
-      <Toaster />
     </div>
   );
 }
